@@ -1,0 +1,22 @@
+.error {
+    border: 1px solid var(--error);
+    margin: 25px;
+    padding: 25px;
+}
+.error p {
+    color: var(--error);
+    font-family: var(--primary-font);
+    margin: 30px;
+    text-align: center;
+    color: var(--platinum);
+    font-size: 20px;
+}
+
+:root {
+  --arylide-yellow: #e9d758ff;
+  --myrtle-green: #297373ff;
+  --coral: #ff8552ff;
+  --platinum: #e6e6e6ff;
+  --jet: #39393aff;
+}
+  

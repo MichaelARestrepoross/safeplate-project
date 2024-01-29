@@ -1,0 +1,15 @@
+:root {
+    --arylide-yellow: #e9d758ff;
+    --myrtle-green: #297373ff;
+    --coral: #ff8552ff;
+    --platinum: #e6e6e6ff;
+    --jet: #39393aff;
+}
+header {
+    background-color: var(--myrtle-green);
+    color: var(--platinum); 
+    padding: 20px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold; 
+}
