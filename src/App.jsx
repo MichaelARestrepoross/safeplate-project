@@ -37,10 +37,10 @@ useEffect(() => {
       <Header/>
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/recipeIndex" element={<RecipeIndex />} />
+        <Route path="/recipe-index" element={<RecipeIndex />} />
         <Route path="/recipe:id" element={<RecipeDetailedView />} />
         {/* Double check userProfile id might need to be a userId instead of just id if broken. */}
-        <Route path="/userProfile:id" element={<UserProfile />} />
+        <Route path="/user-profile:id" element={<UserProfile />} />
         <Route path="/about-page" element={<AboutPage />} />
       </Routes>
     </div>);
