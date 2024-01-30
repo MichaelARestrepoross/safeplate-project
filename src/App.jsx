@@ -42,11 +42,11 @@ useEffect(() => {
       <Header/>
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/recipe-index" element={<RecipeIndex editedRecipeList = {editedRecipeList} setEditedRecipeList = {setEditedRecipeList} setRecipeList = {setRecipeList}/>} />
-        <Route path="/recipe:id" element={<RecipeDetailedView />} />
+        <Route path="/recipe" element={<RecipeIndex editedRecipeList = {editedRecipeList} setEditedRecipeList = {setEditedRecipeList} setRecipeList = {setRecipeList}/>} />
+        <Route path="/recipe/:id" element={<RecipeDetailedView />} />
         {/* Double check userProfile id might need to be a userId instead of just id if broken. */}
-        <Route path="/user-profile:id" element={<UserProfile />} />
-        <Route path="/about-page" element={<AboutPage />} />
+        <Route path="/user/:id" element={<UserProfile />} />
+        <Route path="/about" element={<AboutPage />} />
       </Routes>
     </div>);
 };
