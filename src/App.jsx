@@ -13,6 +13,11 @@ import RecipeDetailedView from "./components/Recipes/RecipeDetailedView";
 import UserProfile from "./components/UserProfile/UserProfile";
 
 const App = () => {
+// Recipes
+const [recipeList,setRecipeList] = useState([]);
+const [editedRecipeList,setEditedRecipeList] = useState([]);
+
+//Users
 const [users, setUsers] = useState ([]);
 const [user, setUser] = useState({});
 const [loadingError, setLoadingError] = useState(false);
@@ -37,7 +42,7 @@ useEffect(() => {
       <Header/>
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/recipe-index" element={<RecipeIndex />} />
+        <Route path="/recipe-index" element={<RecipeIndex editedRecipeList = {editedRecipeList} setEditedRecipeList = {setEditedRecipeList} setRecipeList = {setRecipeList}/>} />
         <Route path="/recipe:id" element={<RecipeDetailedView />} />
         {/* Double check userProfile id might need to be a userId instead of just id if broken. */}
         <Route path="/user-profile:id" element={<UserProfile />} />

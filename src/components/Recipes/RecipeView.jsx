@@ -10,7 +10,7 @@ function RecipeView({
       <h2 className='recipe-name'>
         {name}  
       </h2>
-      <div className='student-image'>
+      <div className='food-image'>
         <img src={image} alt={`${name}'s image`} />
       </div>
       <div className='description-wrapper'>
