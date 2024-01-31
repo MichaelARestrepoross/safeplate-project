@@ -1,18 +1,40 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import ErrorMessage3 from '../Errors/ErrorMessage3'
-import { getAllRecipes } from '../../api/fetch';
+import { getAllRecipes,updateUserAllergies } from '../../api/fetch';
 
-function UserProfile({user ,setUser, users ,recipeList,allergyList,setAllergyList}) {
+function UserProfile({user ,setUser, users ,recipeList,allergyList,setAllergyList, setAddAllergyCalled}) {
 
     const [selectedUser, setSelectedUser] = useState("");
     const [selectedUserId, setSelectedUserId] = useState("");
-    
+    const [newAllergy, setNewAllergy] = useState("");
     const [myRecipes, setMyRecipes] = useState([]);
     const [loadingError, setLoadingError] = useState(false);
 
 
-
+    
+    
+    const addAllergy = async () => {
+        try {
+            if (!newAllergy.trim()) {
+                // If the new allergy is empty, do nothing
+                return;
+            }
+            
+            const updatedAllergies = [...allergyList, newAllergy];
+            
+            // Update the user allergies on the server
+            await updateUserAllergies(selectedUserId, updatedAllergies);
+            
+            setAllergyList(updatedAllergies);
+            setAddAllergyCalled(true);
+            setNewAllergy(""); // Clear the input field
+        } catch (error) {
+            console.error('Error updating allergies:', error);
+            // Handle the error
+        }
+    };
+    
     useEffect(() => {
         const fetchData = async () => {
           try {
@@ -27,6 +49,7 @@ function UserProfile({user ,setUser, users ,recipeList,allergyList,setAllergyLis
                 setSelectedUser(user);
                 setUser(user);
                 setAllergyList(user.allergies);
+                setAddAllergyCalled(false);
               } else {
                 console.error("User not found");
                 setLoadingError(true);
@@ -41,12 +64,11 @@ function UserProfile({user ,setUser, users ,recipeList,allergyList,setAllergyLis
         fetchData();
       
     }, [selectedUserId, users]);
-    
 
-  return (
-    <div>
+    return (
+        <div>
       {loadingError ? (
-        <ErrorMessage3 />
+          <ErrorMessage3 />
       ) : (
         <div className='user-profile-wrapper'>
           <section className='user-profile'>
@@ -75,6 +97,17 @@ function UserProfile({user ,setUser, users ,recipeList,allergyList,setAllergyLis
                 </li> 
               )):null}
             </ul>
+
+            {/* Add Allergy input and button */}
+            <div>
+              <input
+                type="text"
+                placeholder="New Allergy"
+                value={newAllergy}
+                onChange={(e) => setNewAllergy(e.target.value)}
+              />
+              <button onClick={addAllergy}>Add Allergy</button>
+            </div>
 
             {/* DropDown */}
             <select

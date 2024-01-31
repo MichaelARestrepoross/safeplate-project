@@ -13,9 +13,21 @@ export function getAllRecipes() {
     return fetch(`${URL}/userData`).then((response) => response.json());
   }
   
-
+  export function getSingleUser(id) {
+    return fetch(`${URL}/userData/${id}`).then((response) => response.json());
+  }
+  
   export function getAllDifferentAllergies() {
     return fetch(`${URL}/differentAllergies`).then((response) => response.json());
   }
 
-
+// Update user allergies
+export function updateUserAllergies(userId, updatedAllergies) {
+    return fetch(`${URL}/userData/${userId}`, {
+      method: 'PATCH', // or 'PATCH' depending on your API
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ allergies: updatedAllergies }),
+    }).then((response) => response.json());
+  }

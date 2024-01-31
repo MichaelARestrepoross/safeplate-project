@@ -24,6 +24,21 @@ const [loadingError, setLoadingError] = useState(false);
 
 //Allergies
 const [allergyList, setAllergyList] = useState([]);
+const [addAllergyCalled, setAddAllergyCalled] = useState(false);
+
+// useEffect(() => {
+//   getAllUserData()
+//     .then((data) => {
+//       setUsers(data)
+//       console.log(data);
+//       setLoadingError(false);
+//     })
+//     .catch((error) => {
+//       console.error(error);
+//       setLoadingError(true);
+//     });
+
+// }, []);
 
 useEffect(() => {
   getAllUserData()
@@ -37,7 +52,9 @@ useEffect(() => {
       setLoadingError(true);
     });
 
-}, []);
+}, [addAllergyCalled]);
+
+
 useEffect(() => {
   getAllRecipes()
     .then((data) => {
@@ -55,7 +72,6 @@ useEffect(() => {
 
   return (
     <div className="wrapper">
-      Basic Pursuit React Starter
       <Header/>
       <Routes>
         <Route path="/" element={<LandingPage />} />
@@ -72,7 +88,8 @@ useEffect(() => {
           setUser = {setUser} 
           recipeList = {recipeList} 
           allergyList= {allergyList} 
-          setAllergyList = {setAllergyList}/>} 
+          setAllergyList = {setAllergyList}
+          setAddAllergyCalled={setAddAllergyCalled}/>} 
         />
         <Route path="/about" element={<AboutPage />} />
       </Routes>
