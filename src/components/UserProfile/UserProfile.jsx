@@ -34,6 +34,29 @@ function UserProfile({user ,setUser, users ,recipeList,allergyList,setAllergyLis
             // Handle the error
         }
     };
+
+    // Remove allergie code update code below as a format.
+
+    // const addAllergy = async () => {
+    //     try {
+    //         if (!newAllergy.trim()) {
+    //             // If the new allergy is empty, do nothing
+    //             return;
+    //         }
+            
+    //         const updatedAllergies = [...allergyList, newAllergy];
+            
+    //         // Update the user allergies on the server
+    //         await updateUserAllergies(selectedUserId, updatedAllergies);
+            
+    //         setAllergyList(updatedAllergies);
+    //         setAddAllergyCalled(true);
+    //         setNewAllergy(""); // Clear the input field
+    //     } catch (error) {
+    //         console.error('Error updating allergies:', error);
+    //         // Handle the error
+    //     }
+    // };
     
     useEffect(() => {
         const fetchData = async () => {
