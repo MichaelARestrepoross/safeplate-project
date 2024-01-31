@@ -22,6 +22,9 @@ const [users, setUsers] = useState ([]);
 const [user, setUser] = useState({});
 const [loadingError, setLoadingError] = useState(false);
 
+//Allergies
+const [allergyList, setAllergyList] = useState([]);
+
 useEffect(() => {
   getAllUserData()
     .then((data) => {
@@ -35,6 +38,20 @@ useEffect(() => {
     });
 
 }, []);
+useEffect(() => {
+  getAllRecipes()
+    .then((data) => {
+      setRecipeList(data)
+      setEditedRecipeList(data)
+      console.log(data);
+      // setLoadingError(false); edit this to
+    })
+    .catch((error) => {
+      console.error(error);
+      // setLoadingError(true);
+    });
+
+}, []);
 
   return (
     <div className="wrapper">
@@ -42,10 +59,21 @@ useEffect(() => {
       <Header/>
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/recipe" element={<RecipeIndex editedRecipeList = {editedRecipeList} setEditedRecipeList = {setEditedRecipeList} setRecipeList = {setRecipeList}/>} />
+        <Route path="/recipe" element={<RecipeIndex 
+          editedRecipeList = {editedRecipeList} 
+          setEditedRecipeList = {setEditedRecipeList} 
+          setRecipeList = {setRecipeList}/>} 
+        />
         <Route path="/recipe/:id" element={<RecipeDetailedView />} />
         {/* Double check userProfile id might need to be a userId instead of just id if broken. */}
-        <Route path="/user/:id" element={<UserProfile />} />
+        <Route path="/user" element={<UserProfile 
+          users = {users} 
+          user = {user}
+          setUser = {setUser} 
+          recipeList = {recipeList} 
+          allergyList= {allergyList} 
+          setAllergyList = {setAllergyList}/>} 
+        />
         <Route path="/about" element={<AboutPage />} />
       </Routes>
     </div>);

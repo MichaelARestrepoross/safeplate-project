@@ -12,6 +12,7 @@ export function getAllRecipes() {
   export function getAllUserData() {
     return fetch(`${URL}/userData`).then((response) => response.json());
   }
+  
 
   export function getAllDifferentAllergies() {
     return fetch(`${URL}/differentAllergies`).then((response) => response.json());

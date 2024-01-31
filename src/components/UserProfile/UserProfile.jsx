@@ -1,9 +1,98 @@
 import React from 'react'
+import { useState, useEffect } from 'react';
+import ErrorMessage3 from '../Errors/ErrorMessage3'
+import { getAllRecipes } from '../../api/fetch';
 
-function UserProfile() {
+function UserProfile({user ,setUser, users ,recipeList,allergyList,setAllergyList}) {
+
+    const [selectedUser, setSelectedUser] = useState("");
+    const [selectedUserId, setSelectedUserId] = useState("");
+    
+    const [myRecipes, setMyRecipes] = useState([]);
+    const [loadingError, setLoadingError] = useState(false);
+
+
+
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+            if (selectedUserId) {
+              const data = await getAllRecipes();
+              const user = users.find((user) => user.id === selectedUserId);
+              if (user) {
+                // Filter recipes based on the user's recipeIds
+                const filteredRecipes = data.filter((recipe) => user.recipeIds.includes(recipe.id));
+                setMyRecipes(filteredRecipes);
+                setLoadingError(false);
+                setSelectedUser(user);
+                setUser(user);
+                setAllergyList(user.allergies);
+              } else {
+                console.error("User not found");
+                setLoadingError(true);
+              }
+            }
+          } catch (error) {
+            console.error(error);
+            setLoadingError(true);
+          }
+        };
+      
+        fetchData();
+      
+    }, [selectedUserId, users]);
+    
+
   return (
-    <div>UserProfile</div>
-  )
+    <div>
+      {loadingError ? (
+        <ErrorMessage3 />
+      ) : (
+        <div className='user-profile-wrapper'>
+          <section className='user-profile'>
+            <h2 className='users-name'>{selectedUser ? selectedUser.name : 'Select a user'}</h2><br />
+            <p>Hello {selectedUser ? selectedUser.name : 'Select a user'}, would you like to edit your favorites or maybe your allergies today?</p>
+            
+            {/* Displaying individual recipe information */}
+            <h2>My favorites</h2>
+            <ul style={{overflow:"scroll", height:"350px"}}>
+              {myRecipes.map((recipe) => (
+                <li key={recipe.id}>
+                <br />
+                  <p>Name: {recipe.name}</p>
+                  <img src={recipe.image} alt="" style={{width: "200px", height:"200px"}} />
+                  <p>Description: {recipe.description}</p>
+                <br />
+                </li> 
+              ))}
+            </ul>
+                    {console.log(allergyList)}
+            <h2>My Allergies</h2>
+            <ul style={{overflow:"scroll", height:"350px"}}>
+              {allergyList ? allergyList.map((allergy,index) => (
+                <li key={index}>
+                    {allergy}
+                </li> 
+              )):null}
+            </ul>
+
+            {/* DropDown */}
+            <select
+              value={selectedUserId}
+              onChange={(e) => setSelectedUserId(e.target.value)}
+            >
+              <option value="">Select a user</option>
+              {users.map((user) => (
+                <option key={user.id} value={user.id}>
+                  {user.name}
+                </option>
+              ))}
+            </select>
+          </section>
+        </div>
+      )}
+    </div>
+  );
 }
 
 export default UserProfile
