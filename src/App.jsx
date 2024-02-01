@@ -16,6 +16,7 @@ const App = () => {
 // Recipes
 const [recipeList,setRecipeList] = useState([]);
 const [editedRecipeList,setEditedRecipeList] = useState([]);
+const [searchBarRecipeList, setSearchBarRecipeList] = useState([]);
 
 //Users
 const [users, setUsers] = useState ([]);
@@ -25,20 +26,6 @@ const [loadingError, setLoadingError] = useState(false);
 //Allergies
 const [allergyList, setAllergyList] = useState([]);
 const [addAllergyCalled, setAddAllergyCalled] = useState(false);
-
-// useEffect(() => {
-//   getAllUserData()
-//     .then((data) => {
-//       setUsers(data)
-//       console.log(data);
-//       setLoadingError(false);
-//     })
-//     .catch((error) => {
-//       console.error(error);
-//       setLoadingError(true);
-//     });
-
-// }, []);
 
 useEffect(() => {
   getAllUserData()
@@ -55,30 +42,20 @@ useEffect(() => {
 }, [addAllergyCalled]);
 
 
-useEffect(() => {
-  getAllRecipes()
-    .then((data) => {
-      setRecipeList(data)
-      setEditedRecipeList(data)
-      console.log(data);
-      // setLoadingError(false); edit this to
-    })
-    .catch((error) => {
-      console.error(error);
-      // setLoadingError(true);
-    });
-
-}, []);
-
   return (
     <div className="wrapper">
       <Header/>
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/recipe" element={<RecipeIndex 
+          recipeList = {recipeList}
+          setRecipeList = {setRecipeList}
           editedRecipeList = {editedRecipeList} 
           setEditedRecipeList = {setEditedRecipeList} 
-          setRecipeList = {setRecipeList}/>} 
+          searchBarRecipeList = {searchBarRecipeList}
+          setSearchBarRecipeList = {setSearchBarRecipeList}
+          allergyList = {allergyList}
+          user = {user}/>} 
         />
         <Route path="/recipe/:id" element={<RecipeDetailedView />} />
         {/* Double check userProfile id might need to be a userId instead of just id if broken. */}

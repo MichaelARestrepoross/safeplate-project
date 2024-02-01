@@ -65,7 +65,9 @@ function UserProfile({user ,setUser, users ,recipeList,allergyList,setAllergyLis
                 setLoadingError(false);
                 setSelectedUser(user);
                 setUser(user);
+                console.log("current user:", user)
                 setAllergyList(user.allergies);
+                console.log("AlergyList", allergyList);
                 setAddAllergyCalled(false);
               } else {
                 console.error("User not found");

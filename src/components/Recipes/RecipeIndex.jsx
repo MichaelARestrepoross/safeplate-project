@@ -4,24 +4,50 @@ import RecipeView from './RecipeView'
 import ErrorMessage from '../Errors/ErrorMessage';
 import "./RecipeIndex.css"
 
-function RecipeIndex({editedRecipeList,setEditedRecipeList,setRecipeList}) {
+function RecipeIndex({recipeList,setRecipeList,editedRecipeList,setEditedRecipeList,searchBarRecipeList,setSearchBarRecipeList,allergyList, user}) {
 
     const [loadingError, setLoadingError] = useState(false);
 
+    async function allergyRecipeFilter(theAllergyList,editedRecipeList) {
+      let newEditedRecipeList = [...recipeList]; 
+      console.log("The List:",allergyList);
+      theAllergyList.forEach((allergy)=>{
+        console.log("The Alergy:", allergy)
+        // Filter out recipes that include the allergy
+         newEditedRecipeList = newEditedRecipeList.filter((recipe,i) => {
+          const ingredientString = recipe.ingredients.join(",")
+          return !(ingredientString.includes(allergy));
+        });
+      })
+      console.log(newEditedRecipeList)
+      setEditedRecipeList(newEditedRecipeList);
+    }
+    
     useEffect(() => {
-      if(editedRecipeList.length===0){
-        getAllRecipes()
+      getAllRecipes()
         .then((data) => {
-            setRecipeList(data);
-            setEditedRecipeList(data);
-            setLoadingError(false);
+          setRecipeList(data)
+          if(editedRecipeList.length===0){
+            setEditedRecipeList(data)
+          }
+          console.log(data);
+          setLoadingError(false); 
         })
         .catch((error) => {
-            console.error(error);
-            setLoadingError(true);
+          console.error(error);
+          setLoadingError(true);
         });
-      }
+    
     }, []);
+
+    useEffect(()=>{
+      if(user){
+        allergyRecipeFilter(allergyList,editedRecipeList)
+        console.log("Edited REcipe List",editedRecipeList)
+        console.log("user", user)
+      }
+    },[user])
+
   return (
     <div>
       {loadingError ? (
