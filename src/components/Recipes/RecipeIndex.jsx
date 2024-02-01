@@ -7,8 +7,9 @@ import "./RecipeIndex.css"
 function RecipeIndex({recipeList,setRecipeList,editedRecipeList,setEditedRecipeList,searchBarRecipeList,setSearchBarRecipeList,allergyList, user}) {
 
     const [loadingError, setLoadingError] = useState(false);
+    const [searchTerm, setSearchTerm] = useState('');
 
-    async function allergyRecipeFilter(theAllergyList,editedRecipeList) {
+    async function allergyRecipeFilter(theAllergyList) {
       let newEditedRecipeList = [...recipeList]; 
       console.log("The List:",allergyList);
       theAllergyList.forEach((allergy)=>{
@@ -22,6 +23,12 @@ function RecipeIndex({recipeList,setRecipeList,editedRecipeList,setEditedRecipeL
       console.log(newEditedRecipeList)
       setEditedRecipeList(newEditedRecipeList);
     }
+
+
+    const handleSearchInputChange = (event) => {
+      setSearchTerm(event.target.value);
+    };
+  
     
     useEffect(() => {
       getAllRecipes()
@@ -30,7 +37,7 @@ function RecipeIndex({recipeList,setRecipeList,editedRecipeList,setEditedRecipeL
           if(editedRecipeList.length===0){
             setEditedRecipeList(data)
           }
-          console.log(data);
+          console.log("The Data:",data);
           setLoadingError(false); 
         })
         .catch((error) => {
@@ -42,11 +49,20 @@ function RecipeIndex({recipeList,setRecipeList,editedRecipeList,setEditedRecipeL
 
     useEffect(()=>{
       if(user){
-        allergyRecipeFilter(allergyList,editedRecipeList)
+        allergyRecipeFilter(allergyList)
         console.log("Edited REcipe List",editedRecipeList)
         console.log("user", user)
       }
     },[user])
+
+
+    useEffect(() => {
+      // Update the edited recipe list based on the search term
+      const filteredRecipes = editedRecipeList.filter((recipe) =>
+        recipe.name.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setSearchBarRecipeList(filteredRecipes);
+    }, [searchTerm,editedRecipeList]);
 
   return (
     <div>
@@ -54,8 +70,14 @@ function RecipeIndex({recipeList,setRecipeList,editedRecipeList,setEditedRecipeL
           <ErrorMessage />
           ) : (
           <div className='index-wrapper'>
+            <input
+              type='text'
+              placeholder='Search recipes...'
+              value={searchTerm}
+              onChange={handleSearchInputChange}
+            />
             <section className='all-recipes'>
-                {editedRecipeList.map((recipe) => {
+                {searchBarRecipeList.map((recipe) => {
                     return  <RecipeView recipe={recipe} key={recipe.id}/>;
                 })}
             </section>
