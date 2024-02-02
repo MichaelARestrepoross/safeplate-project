@@ -43,6 +43,9 @@ const navigateToRecipes = () => {
 const navigateToProfiles = () => {
   navigate('/user');
 };
+const navigateToAbout = () => {
+  navigate('/about');
+};
 
 useEffect(() => {
   getAllUserData()
@@ -65,9 +68,13 @@ useEffect(() => {
       navigateToHome = {navigateToHome}
       navigateToRecipes = {navigateToRecipes}
       navigateToProfiles = {navigateToProfiles}
+      navigateToAbout = {navigateToAbout}
       />
       <Routes>
-        <Route path="/" element={<LandingPage />} />
+        <Route path="/" element={<LandingPage 
+          navigateToRecipes = {navigateToRecipes}
+          navigateToProfiles = {navigateToProfiles}/>} 
+        />
         <Route path="/recipe" element={<RecipeIndex 
           recipeList = {recipeList}
           setRecipeList = {setRecipeList}

@@ -1,14 +1,17 @@
 import { Link } from 'react-router-dom'
 import "./Header.css"
-function Header({navigateToHome,navigateToRecipes,navigateToProfiles}) {
+function Header({navigateToHome,navigateToRecipes,navigateToProfiles,navigateToAbout}) {
 
     return (
-      <header>
+      <header className='Header-wrapper'>
       <Link to={'/'} onClick={navigateToHome}>
-        <div>SafePlate</div>
+        <div className='home-h1'>SafePlate</div>
       </Link>
-      <h2 onClick={navigateToRecipes}>Recipes</h2>
-      <h2 onClick={navigateToProfiles}>Profiles</h2>
+      <div className='navigate-wrapper'>
+        <h2 onClick={navigateToRecipes}>Recipes</h2>
+        <h2 onClick={navigateToProfiles}>Profiles</h2>
+        <h2 onClick={navigateToAbout}>About Us</h2>
+      </div>
     </header>
     )
   }
