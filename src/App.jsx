@@ -1,4 +1,4 @@
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate,Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 //calling api test
@@ -17,6 +17,7 @@ const App = () => {
 const [recipeList,setRecipeList] = useState([]);
 const [editedRecipeList,setEditedRecipeList] = useState([]);
 const [searchBarRecipeList, setSearchBarRecipeList] = useState([]);
+const [addFavoriteCalled,setAddFavoriteCalled] = useState(false);
 
 //Users
 const [users, setUsers] = useState ([]);
@@ -26,6 +27,22 @@ const [loadingError, setLoadingError] = useState(false);
 //Allergies
 const [allergyList, setAllergyList] = useState([]);
 const [addAllergyCalled, setAddAllergyCalled] = useState(false);
+
+//Navigation tools
+const navigate = useNavigate();
+
+const navigateToHome = () => {
+  console.log("Navigate to home")
+  navigate('/');
+};
+
+const navigateToRecipes = () => {
+  navigate('/recipe');
+};
+
+const navigateToProfiles = () => {
+  navigate('/user');
+};
 
 useEffect(() => {
   getAllUserData()
@@ -39,12 +56,16 @@ useEffect(() => {
       setLoadingError(true);
     });
 
-}, [addAllergyCalled]);
+}, [addAllergyCalled,addFavoriteCalled]);
 
 
   return (
     <div className="wrapper">
-      <Header/>
+      <Header
+      navigateToHome = {navigateToHome}
+      navigateToRecipes = {navigateToRecipes}
+      navigateToProfiles = {navigateToProfiles}
+      />
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/recipe" element={<RecipeIndex 
@@ -57,7 +78,12 @@ useEffect(() => {
           allergyList = {allergyList}
           user = {user}/>} 
         />
-        <Route path="/recipe/:id" element={<RecipeDetailedView />} />
+        <Route path="/recipe/:id" element={<RecipeDetailedView 
+        user={user}
+        navigateToProfiles = {navigateToProfiles}  
+        addAllergyCalled = {addAllergyCalled}
+        setAddFavoriteCalled = {setAddFavoriteCalled}
+        />} />
         {/* Double check userProfile id might need to be a userId instead of just id if broken. */}
         <Route path="/user" element={<UserProfile 
           users = {users} 

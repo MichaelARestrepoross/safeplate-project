@@ -2,13 +2,14 @@ import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import ErrorMessage2 from "../Errors/ErrorMessage2"
 
-import { getSingleRecipe} from "../../api/fetch"
+import { getSingleRecipe ,updateUserFavorites } from "../../api/fetch"
 
 import "./RecipeDetailedView.css"
 
-function RecipeDetailedView() {
+function RecipeDetailedView({user,navigateToProfiles,addAllergyCalled,setAddFavoriteCalled}) {
     const { id } = useParams();
     const [loadingError, setLoadingError] = useState(false);
+    const [newFavoriteId, setNewFavoriteId] = useState("");
 
   const [recipe, setRecipe] = useState({
     id: "",
@@ -19,10 +20,34 @@ function RecipeDetailedView() {
     instructions: []
   });
 
+  const addFavorite = async () => {
+    try {
+        if (!newFavoriteId.trim()|| user.recipeIds.includes(newFavoriteId)) {
+            // If the new allergy is empty, do nothing or if the recipe is already in the list
+            return;
+        }
+        
+        const updatedFavorites = [...user.recipeIds, newFavoriteId];
+        
+        // Update the user allergies on the server
+        await updateUserFavorites(user.id, updatedFavorites);
+        
+        setAddFavoriteCalled(true);
+        setNewFavoriteId(""); 
+    } catch (error) {
+        console.error('Error updating favorites:', error);
+        // Handle the error
+    }
+};
+
   useEffect(() => {
     getSingleRecipe(id)
       .then((data) => {
           setRecipe(data);
+          if(user){
+            setNewFavoriteId(id)
+            setAddFavoriteCalled(false);
+          }
           setLoadingError(false);
       })
       .catch((error) => {
@@ -37,6 +62,13 @@ function RecipeDetailedView() {
           <ErrorMessage2 />
           ) : (
           <div className='detailed-recipe-wrapper'>
+            <div className="button-wrapper">
+                {user.name ? <button className="add-favorite-button" onClick={addFavorite}>
+                    Add to {user.name}'s favorites
+                </button> : <button className="add-favorite-button" onClick={navigateToProfiles}>
+                     Click here to select a user.
+                </button> }
+            </div>
             <section className='detailed-recipe'>
                 <h2 className='recipe-name'>
                     {recipe.name}  

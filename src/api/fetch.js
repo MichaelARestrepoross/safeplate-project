@@ -32,7 +32,7 @@ export function updateUserAllergies(userId, updatedAllergies) {
     }).then((response) => response.json());
   }
 
-// Update user allergies
+// Update user Favorites
 export function updateUserFavorites(userId, updatedFavoritesIds) {
   return fetch(`${URL}/userData/${userId}`, {
     method: 'PATCH', // or 'PATCH' depending on your API
