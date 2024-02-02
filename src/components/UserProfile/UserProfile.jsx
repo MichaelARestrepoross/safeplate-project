@@ -1,9 +1,9 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import ErrorMessage3 from '../Errors/ErrorMessage3'
-import { getAllRecipes,updateUserAllergies } from '../../api/fetch';
+import { getAllRecipes,updateUserAllergies, updateUserFavorites } from '../../api/fetch';
 
-function UserProfile({user ,setUser, users ,recipeList,allergyList,setAllergyList, setAddAllergyCalled}) {
+function UserProfile({user ,setUser, users ,recipeList,allergyList,setAllergyList, setAddAllergyCalled,addAllergyCalled,setAddFavoriteCalled}) {
 
     const [selectedUser, setSelectedUser] = useState("");
     const [selectedUserId, setSelectedUserId] = useState("");
@@ -51,6 +51,21 @@ function UserProfile({user ,setUser, users ,recipeList,allergyList,setAllergyLis
             // Handle the error
         }
     };
+    const deleteFavorite = async (newFavoriteId) => {
+      try {          
+          // const updatedFavorites = [...user.recipeIds, newFavoriteId];
+          const updatedFavorites = user.recipeIds.filter((recipeId) => recipeId !== newFavoriteId);
+          
+          // Update the user allergies on the server
+          await updateUserFavorites(user.id, updatedFavorites);
+          
+          setAddFavoriteCalled(true);
+          setNewFavoriteId(""); 
+      } catch (error) {
+          console.error('Error updating favorites:', error);
+          // Handle the error
+      }
+  };
 
     useEffect(() => {
         const fetchData = async () => {
@@ -69,6 +84,7 @@ function UserProfile({user ,setUser, users ,recipeList,allergyList,setAllergyLis
                 setAllergyList(user.allergies);
                 console.log("AlergyList", allergyList);
                 setAddAllergyCalled(false);
+                setAddFavoriteCalled(false);
               } else {
                 console.error("User not found");
                 setLoadingError(true);
@@ -103,6 +119,9 @@ function UserProfile({user ,setUser, users ,recipeList,allergyList,setAllergyLis
                   <p>Name: {recipe.name}</p>
                   <img src={recipe.image} alt="" style={{width: "200px", height:"200px"}} />
                   <p>Description: {recipe.description}</p>
+                  <button onClick={() => deleteFavorite(recipe.id)}>
+                        Delete
+                    </button>
                 <br />
                 </li> 
               ))}

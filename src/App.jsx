@@ -92,7 +92,11 @@ useEffect(() => {
           recipeList = {recipeList} 
           allergyList= {allergyList} 
           setAllergyList = {setAllergyList}
-          setAddAllergyCalled={setAddAllergyCalled}/>} 
+          setAddAllergyCalled={setAddAllergyCalled}
+          addAllergyCalled = {addAllergyCalled}
+          setAddFavoriteCalled = {setAddFavoriteCalled}
+          />} 
+          
         />
         <Route path="/about" element={<AboutPage />} />
       </Routes>
