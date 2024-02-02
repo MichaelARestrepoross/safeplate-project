@@ -31,3 +31,14 @@ export function updateUserAllergies(userId, updatedAllergies) {
       body: JSON.stringify({ allergies: updatedAllergies }),
     }).then((response) => response.json());
   }
+
+// Update user allergies
+export function updateUserFavorites(userId, updatedFavoritesIds) {
+  return fetch(`${URL}/userData/${userId}`, {
+    method: 'PATCH', // or 'PATCH' depending on your API
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ recipeIds: updatedFavoritesIds }),
+  }).then((response) => response.json());
+}
