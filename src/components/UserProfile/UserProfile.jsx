@@ -4,9 +4,9 @@ import ErrorMessage3 from '../Errors/ErrorMessage3'
 import { Link } from 'react-router-dom';
 import { getAllRecipes,updateUserAllergies, updateUserFavorites } from '../../api/fetch';
 
-function UserProfile({user ,setUser, users ,recipeList,allergyList,setAllergyList, setAddAllergyCalled,addAllergyCalled,setAddFavoriteCalled}) {
+function UserProfile({user ,setUser, users ,recipeList,allergyList,setAllergyList, setAddAllergyCalled,addAllergyCalled,setAddFavoriteCalled,selectedUser,setSelectedUser}) {
 
-    const [selectedUser, setSelectedUser] = useState("");
+   
     const [selectedUserId, setSelectedUserId] = useState("");
     const [newAllergy, setNewAllergy] = useState("");
     const [myRecipes, setMyRecipes] = useState([]);
@@ -68,38 +68,43 @@ function UserProfile({user ,setUser, users ,recipeList,allergyList,setAllergyLis
       }
   };
 
-    useEffect(() => {
-        const fetchData = async () => {
-          try {
-            if (selectedUserId) {
-              const data = await getAllRecipes();
-              const user = users.find((user) => user.id === selectedUserId);
-              if (user) {
-                // Filter recipes based on the user's recipeIds
-                const filteredRecipes = data.filter((recipe) => user.recipeIds.includes(recipe.id));
-                setMyRecipes(filteredRecipes);
-                setLoadingError(false);
-                setSelectedUser(user);
-                setUser(user);
-                console.log("current user:", user)
-                setAllergyList(user.allergies);
-                console.log("AlergyList", allergyList);
-                setAddAllergyCalled(false);
-                setAddFavoriteCalled(false);
-              } else {
-                console.error("User not found");
-                setLoadingError(true);
-              }
-            }
-          } catch (error) {
-            console.error(error);
-            setLoadingError(true);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // If selectedUserId is not set, use the current user's ID as the default value
+        const userIdToFetch = selectedUserId || user.id;
+
+        if (userIdToFetch) {
+          const data = await getAllRecipes();
+          const userdata = users.find((user) => user.id === userIdToFetch);
+
+          if (userdata) {
+            // Filter recipes based on the user's recipeIds
+            const filteredRecipes = recipeList.filter((recipe) => userdata.recipeIds.includes(recipe.id));
+            setMyRecipes(filteredRecipes);
+
+            setSelectedUser(userdata);
+            setSelectedUserId(userdata.id);
+            setUser(userdata);
+            setAllergyList(userdata.allergies);
+          } else {
+            console.error("User not found");
           }
-        };
-      
-        fetchData();
-      
-    }, [selectedUserId, users]);
+
+          setLoadingError(false);
+          setAddAllergyCalled(false);
+          setAddFavoriteCalled(false);
+        }
+      } catch (error) {
+        console.error(error);
+        setLoadingError(true);
+      }
+    };
+
+    fetchData();
+}, [selectedUserId, users, user]);  // Include user in the dependency array
+
+
 
     return (
         <div>
@@ -113,6 +118,7 @@ function UserProfile({user ,setUser, users ,recipeList,allergyList,setAllergyLis
             
             {/* Displaying individual recipe information */}
             <h2>My favorites</h2>
+            {console.log("Selected User:",selectedUser)}
             <ul style={{overflow:"scroll", height:"350px"}}>
               {myRecipes.map((recipe) => (
                 <Link to={`/recipe/${recipe.id}`}>

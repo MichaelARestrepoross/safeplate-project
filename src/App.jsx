@@ -22,6 +22,7 @@ const [addFavoriteCalled,setAddFavoriteCalled] = useState(false);
 //Users
 const [users, setUsers] = useState ([]);
 const [user, setUser] = useState({});
+const [selectedUser, setSelectedUser] = useState("");
 const [loadingError, setLoadingError] = useState(false);
 
 //Allergies
@@ -96,6 +97,8 @@ useEffect(() => {
           users = {users} 
           user = {user}
           setUser = {setUser} 
+          selectedUser = {selectedUser}
+          setSelectedUser ={setSelectedUser}
           recipeList = {recipeList} 
           allergyList= {allergyList} 
           setAllergyList = {setAllergyList}
