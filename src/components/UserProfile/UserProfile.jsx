@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import ErrorMessage3 from '../Errors/ErrorMessage3'
+import { Link } from 'react-router-dom';
 import { getAllRecipes,updateUserAllergies, updateUserFavorites } from '../../api/fetch';
 
 function UserProfile({user ,setUser, users ,recipeList,allergyList,setAllergyList, setAddAllergyCalled,addAllergyCalled,setAddFavoriteCalled}) {
@@ -114,6 +115,7 @@ function UserProfile({user ,setUser, users ,recipeList,allergyList,setAllergyLis
             <h2>My favorites</h2>
             <ul style={{overflow:"scroll", height:"350px"}}>
               {myRecipes.map((recipe) => (
+                <Link to={`/recipe/${recipe.id}`}>
                 <li key={recipe.id}>
                 <br />
                   <p>Name: {recipe.name}</p>
@@ -124,6 +126,7 @@ function UserProfile({user ,setUser, users ,recipeList,allergyList,setAllergyLis
                     </button>
                 <br />
                 </li> 
+                </Link>
               ))}
             </ul>
                     {console.log(allergyList)}
