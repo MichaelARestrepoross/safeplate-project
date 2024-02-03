@@ -24,7 +24,7 @@ export function getAllRecipes() {
 // Update user allergies
 export function updateUserAllergies(userId, updatedAllergies) {
     return fetch(`${URL}/userData/${userId}`, {
-      method: 'PATCH', // or 'PATCH' depending on your API
+      method: 'PATCH', 
       headers: {
         'Content-Type': 'application/json',
       },
@@ -35,7 +35,7 @@ export function updateUserAllergies(userId, updatedAllergies) {
 // Update user Favorites
 export function updateUserFavorites(userId, updatedFavoritesIds) {
   return fetch(`${URL}/userData/${userId}`, {
-    method: 'PATCH', // or 'PATCH' depending on your API
+    method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
     },
@@ -44,12 +44,23 @@ export function updateUserFavorites(userId, updatedFavoritesIds) {
 }
 
 // Update user User meal-plan
-export function updateUserMealPlan(userId, UpdatedMealPlan) {
+export function updateUserMealPlan(userId, UpdatedMealDayPlan, day) {
+  // Assuming UpdatedMealDayPlan is an object with keys like "breakfast," "lunch," and "dinner"
+  const updatedBody = {
+    weeklyMeals: {
+      [day]: {
+        breakfast: UpdatedMealDayPlan.breakfast || [],
+        lunch: UpdatedMealDayPlan.lunch || [],
+        dinner: UpdatedMealDayPlan.dinner || [],
+      },
+    },
+  };
+
   return fetch(`${URL}/userData/${userId}`, {
-    method: 'PATCH', // or 'PATCH' depending on your API
+    method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ weeklyMeals: UpdatedMealPlan }),
+    body: JSON.stringify(updatedBody),
   }).then((response) => response.json());
 }
