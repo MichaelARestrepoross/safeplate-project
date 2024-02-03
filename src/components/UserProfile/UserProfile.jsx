@@ -121,18 +121,18 @@ function UserProfile({user ,setUser, users ,recipeList,allergyList,setAllergyLis
             {console.log("Selected User:",selectedUser)}
             <ul style={{overflow:"scroll", height:"350px"}}>
               {myRecipes.map((recipe) => (
-                <Link to={`/recipe/${recipe.id}`}>
                 <li key={recipe.id}>
                 <br />
+                <Link to={`/recipe/${recipe.id}`}>
                   <p>Name: {recipe.name}</p>
                   <img src={recipe.image} alt="" style={{width: "200px", height:"200px"}} />
                   <p>Description: {recipe.description}</p>
+                </Link>
                   <button onClick={() => deleteFavorite(recipe.id)}>
                         Delete
                     </button>
                 <br />
                 </li> 
-                </Link>
               ))}
             </ul>
                     {console.log(allergyList)}

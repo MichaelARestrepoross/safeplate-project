@@ -1,8 +1,17 @@
 import React from 'react'
 
-function WeeklyMealPlan() {
+function WeeklyMealPlan({user}) {
   return (
-    <div>WeeklyMealPlan</div>
+    <div className='weekly-mealplan-wrapper'>
+      <h1>
+   ÷
+      </h1>
+      <div className='the-meal-plan'>
+
+
+      </div>
+      WeeklyMealPlan
+    </div>
   )
 }
 

@@ -11,6 +11,7 @@ import AboutPage from "./components/Common/AboutPage";
 import RecipeIndex from "./components/Recipes/RecipeIndex";
 import RecipeDetailedView from "./components/Recipes/RecipeDetailedView";
 import UserProfile from "./components/UserProfile/UserProfile";
+import WeeklyMealPlan from "./components/UserProfile/WeeklyMealPlan";
 
 const App = () => {
 // Recipes
@@ -108,6 +109,7 @@ useEffect(() => {
           />} 
           
         />
+        <Route path="/meal-plan" element={<WeeklyMealPlan />} />
         <Route path="/about" element={<AboutPage />} />
       </Routes>
     </div>);
