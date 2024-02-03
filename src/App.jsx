@@ -120,6 +120,7 @@ useEffect(() => {
         <Route path="/meal-plan" element={<WeeklyMealPlan 
         user = {user}
         myRecipes= {myRecipes}
+        recipeList = {recipeList}
           />} 
         />
         <Route path="/about" element={<AboutPage />} />
