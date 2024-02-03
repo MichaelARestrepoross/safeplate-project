@@ -46,6 +46,10 @@ const navigateToRecipes = () => {
 const navigateToProfiles = () => {
   navigate('/user');
 };
+const navigateToMealPlan = () => {
+  navigate('/meal-plan');
+};
+
 const navigateToAbout = () => {
   navigate('/about');
 };
@@ -109,11 +113,13 @@ useEffect(() => {
           setAddAllergyCalled={setAddAllergyCalled}
           addAllergyCalled = {addAllergyCalled}
           setAddFavoriteCalled = {setAddFavoriteCalled}
+          navigateToMealPlan = {navigateToMealPlan}
           />} 
           
         />
         <Route path="/meal-plan" element={<WeeklyMealPlan 
         user = {user}
+        myRecipes= {myRecipes}
           />} 
         />
         <Route path="/about" element={<AboutPage />} />

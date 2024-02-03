@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { getAllRecipes,updateUserAllergies, updateUserFavorites } from '../../api/fetch';
 
 function UserProfile(
-  {user ,setUser, users ,recipeList,myRecipes,setMyRecipes, allergyList,setAllergyList, setAddAllergyCalled,addAllergyCalled,setAddFavoriteCalled,selectedUser,setSelectedUser}) {
+  {user ,setUser, users ,recipeList,myRecipes,setMyRecipes, allergyList,setAllergyList, setAddAllergyCalled,addAllergyCalled,setAddFavoriteCalled,selectedUser,setSelectedUser,navigateToMealPlan}) {
 
    
     const [selectedUserId, setSelectedUserId] = useState("");
@@ -116,7 +116,7 @@ function UserProfile(
           <section className='user-profile'>
             <h2 className='users-name'>{selectedUser ? selectedUser.name : 'Select a user'}</h2><br />
             <p>Hello {selectedUser ? selectedUser.name : 'Select a user'}, would you like to edit your favorites or maybe your allergies today?</p>
-            
+            {selectedUser?  <h2 onClick={navigateToMealPlan}> {selectedUser.name}'s meal plan</h2>  : null}
             {/* Displaying individual recipe information */}
             <h2>My favorites</h2>
             {console.log("Selected User:",selectedUser)}
