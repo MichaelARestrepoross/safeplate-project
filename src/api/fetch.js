@@ -42,3 +42,14 @@ export function updateUserFavorites(userId, updatedFavoritesIds) {
     body: JSON.stringify({ recipeIds: updatedFavoritesIds }),
   }).then((response) => response.json());
 }
+
+// Update user User meal-plan
+export function updateUserMealPlan(userId, UpdatedMealPlan) {
+  return fetch(`${URL}/userData/${userId}`, {
+    method: 'PATCH', // or 'PATCH' depending on your API
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ weeklyMeals: UpdatedMealPlan }),
+  }).then((response) => response.json());
+}

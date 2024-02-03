@@ -23,6 +23,7 @@ const [addFavoriteCalled,setAddFavoriteCalled] = useState(false);
 //Users
 const [users, setUsers] = useState ([]);
 const [user, setUser] = useState({});
+const [myRecipes, setMyRecipes] = useState([]);
 const [selectedUser, setSelectedUser] = useState("");
 const [loadingError, setLoadingError] = useState(false);
 
@@ -101,6 +102,8 @@ useEffect(() => {
           selectedUser = {selectedUser}
           setSelectedUser ={setSelectedUser}
           recipeList = {recipeList} 
+          myRecipes = {myRecipes}
+          setMyRecipes = {setMyRecipes}
           allergyList= {allergyList} 
           setAllergyList = {setAllergyList}
           setAddAllergyCalled={setAddAllergyCalled}
@@ -109,7 +112,10 @@ useEffect(() => {
           />} 
           
         />
-        <Route path="/meal-plan" element={<WeeklyMealPlan />} />
+        <Route path="/meal-plan" element={<WeeklyMealPlan 
+        user = {user}
+          />} 
+        />
         <Route path="/about" element={<AboutPage />} />
       </Routes>
     </div>);

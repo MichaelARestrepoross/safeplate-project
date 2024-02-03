@@ -4,12 +4,13 @@ import ErrorMessage3 from '../Errors/ErrorMessage3'
 import { Link } from 'react-router-dom';
 import { getAllRecipes,updateUserAllergies, updateUserFavorites } from '../../api/fetch';
 
-function UserProfile({user ,setUser, users ,recipeList,allergyList,setAllergyList, setAddAllergyCalled,addAllergyCalled,setAddFavoriteCalled,selectedUser,setSelectedUser}) {
+function UserProfile(
+  {user ,setUser, users ,recipeList,myRecipes,setMyRecipes, allergyList,setAllergyList, setAddAllergyCalled,addAllergyCalled,setAddFavoriteCalled,selectedUser,setSelectedUser}) {
 
    
     const [selectedUserId, setSelectedUserId] = useState("");
     const [newAllergy, setNewAllergy] = useState("");
-    const [myRecipes, setMyRecipes] = useState([]);
+
     const [loadingError, setLoadingError] = useState(false);
 
 
