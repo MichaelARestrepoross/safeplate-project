@@ -10,19 +10,14 @@ function UserProfile(
    
     const [selectedUserId, setSelectedUserId] = useState("");
     const [newAllergy, setNewAllergy] = useState("");
-
     const [loadingError, setLoadingError] = useState(false);
 
-
-    x
-    
     const addAllergy = async () => {
         try {
             if (!newAllergy.trim()) {
                 // If the new allergy is empty, do nothing
                 return;
             }
-            
             const updatedAllergies = [...allergyList, newAllergy];
             
             // Update the user allergies on the server

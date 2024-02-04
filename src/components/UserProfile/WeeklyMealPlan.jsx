@@ -56,16 +56,16 @@ useEffect(() => {
 }, [updateTrigger]);
 
   return (
-  <div>
-    {loadingError ? (
-      <ErrorMessage2 />
-      ) : (
     <div className='weekly-mealplan-wrapper'>
       <h1 className='Week-meal-plan-header'>{user.name}'s Weekly meal plan</h1>
       <div className='meal-plan-selector'>
         <ul style={{ overflow: 'scroll', height: '350px' }}>
           {myRecipes.map((recipe) => (
-            <li key={recipe.id} onClick={() => handleChange(recipe)}>
+            <li
+              className={selectedRecipe.id === recipe.id ? 'selected-recipe' : 'unselected-recipe'}
+              key={recipe.id}
+              onClick={() => handleChange(recipe)}
+            >
               <br />
               <p>Name: {recipe.name}</p>
               <img src={recipe.image} alt="" style={{ width: '200px', height: '200px' }} />
@@ -152,8 +152,7 @@ useEffect(() => {
           </section>
         ))}
       </div>
-    </div>
-      )}
+
   </div>
   );
 }
