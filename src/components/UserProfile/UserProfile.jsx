@@ -112,12 +112,24 @@ function UserProfile(
             <h2 className='users-name'>{selectedUser ? selectedUser.name : 'Select a user'}</h2><br />
             <p>Hello {selectedUser ? selectedUser.name : 'Select a user'}, would you like to edit your favorites or maybe your allergies today?</p>
             {selectedUser?  <h2 onClick={navigateToMealPlan}> {selectedUser.name}'s meal plan</h2>  : null}
+            {/* DropDown */}
+            <select
+              value={selectedUserId}
+              onChange={(e) => setSelectedUserId(e.target.value)}
+            >
+              <option value="">Select a user</option>
+              {users.map((user) => (
+                <option key={user.id} value={user.id}>
+                  {user.name}
+                </option>
+              ))}
+            </select>
             {/* Displaying individual recipe information */}
             <h2>My favorites</h2>
             {console.log("Selected User:",selectedUser)}
             <ul style={{overflow:"scroll", height:"350px"}}>
               {myRecipes.map((recipe) => (
-                <li key={recipe.id}>
+                <li className='single-favorite' key={recipe.id}>
                 <br />
                 <Link to={`/recipe/${recipe.id}`}>
                   <p>Name: {recipe.name}</p>
@@ -133,9 +145,9 @@ function UserProfile(
             </ul>
                     {console.log(allergyList)}
             <h2>My Allergies</h2>
-            <ul style={{overflow:"scroll", height:"350px"}}>
+            <ul className='allergy-list' style={{overflow:"scroll", height:"350px"}}>
               {allergyList ? allergyList.map((allergy,index) => (
-                <li key={index}>
+                <li className='single-allergen' key={index}>
                     {allergy}
                     <button onClick={() => deleteAllergy(allergy)}>
                         Delete
@@ -154,19 +166,6 @@ function UserProfile(
               />
               <button onClick={addAllergy}>Add Allergy</button>
             </div>
-
-            {/* DropDown */}
-            <select
-              value={selectedUserId}
-              onChange={(e) => setSelectedUserId(e.target.value)}
-            >
-              <option value="">Select a user</option>
-              {users.map((user) => (
-                <option key={user.id} value={user.id}>
-                  {user.name}
-                </option>
-              ))}
-            </select>
           </section>
         </div>
       )}

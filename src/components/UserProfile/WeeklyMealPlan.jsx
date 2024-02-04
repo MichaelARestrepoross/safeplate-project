@@ -59,7 +59,7 @@ useEffect(() => {
     <div className='weekly-mealplan-wrapper'>
       <h1 className='Week-meal-plan-header'>{user.name}'s Weekly meal plan</h1>
       <div className='meal-plan-selector'>
-        <ul style={{ overflow: 'scroll', height: '350px' }}>
+        <ul className='favorite-options' style={{ overflow: 'scroll', height: '350px' }}>
           {myRecipes.map((recipe) => (
             <li
               className={selectedRecipe.id === recipe.id ? 'selected-recipe' : 'unselected-recipe'}
@@ -88,7 +88,7 @@ useEffect(() => {
                   if (recipeId !== "") {
                     const recipe = recipeList.find((r) => r.id === recipeId);
                     return (
-                      <li key={recipeId + day + index}>
+                      <li className='scheduled-meal breakfast' key={recipeId + day + index}>
                         {recipe && (
                           <div>
                             <p>Name: {recipe.name}</p>
@@ -113,7 +113,7 @@ useEffect(() => {
                 if (recipeId !== "") {
                 const recipe = recipeList.find((r) => r.id === recipeId);
                 return (
-                  <li key={recipeId + day +index}>
+                  <li className='scheduled-meal lunch' key={recipeId + day +index}>
                     {recipe && (
                       <div>
                         <p>Name: {recipe.name}</p>
@@ -135,7 +135,7 @@ useEffect(() => {
                 if (recipeId !== "") {
                 const recipe = recipeList.find((r) => r.id === recipeId);
                 return (
-                  <li key={recipeId + day + index}>
+                  <li className='scheduled-meal dinner' key={recipeId + day + index}>
                     {recipe && (
                       <div>
                         <p>Name: {recipe.name}</p>

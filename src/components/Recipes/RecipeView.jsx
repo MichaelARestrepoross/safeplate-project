@@ -4,9 +4,9 @@ import React from 'react'
 function RecipeView({
     recipe: {id,name,image,description}}) {
   return (
-    <Link to={`/recipe/${id}`}>
+    <Link className='single-recipe' to={`/recipe/${id}`}>
     <div>RecipeView</div>
-    <article className='single-recipe'>
+    <article>
       <h2 className='recipe-name'>
         {name}  
       </h2>
