@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { getAllRecipes } from '../../api/fetch';
 import RecipeView from './RecipeView'
 import ErrorMessage from '../Errors/ErrorMessage';
 import "./RecipeIndex.css"
@@ -29,24 +28,6 @@ function RecipeIndex({recipeList,setRecipeList,editedRecipeList,setEditedRecipeL
       setSearchTerm(event.target.value);
     };
   
-    
-    useEffect(() => {
-      getAllRecipes()
-        .then((data) => {
-          setRecipeList(data)
-          if(editedRecipeList.length===0){
-            setEditedRecipeList(data)
-          }
-          console.log("The Data:",data);
-          setLoadingError(false); 
-        })
-        .catch((error) => {
-          console.error(error);
-          setLoadingError(true);
-        });
-    
-    }, []);
-
     useEffect(()=>{
       if(user){
         allergyRecipeFilter(allergyList)

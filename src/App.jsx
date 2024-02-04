@@ -1,8 +1,8 @@
-import { Route, Routes, useNavigate,Link } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 //calling api test
-import { getAllRecipes,getAllUserData,getAllDifferentAllergies } from './api/fetch';
+import { getAllRecipes,getAllUserData } from './api/fetch';
 
 //Components
 import Header from "./components/Common/Header";
@@ -68,6 +68,23 @@ useEffect(() => {
 
 }, [addAllergyCalled,addFavoriteCalled]);
 
+useEffect(() => {
+  getAllRecipes()
+    .then((data) => {
+      setRecipeList(data)
+      if(editedRecipeList.length===0){
+        setEditedRecipeList(data)
+      }
+      console.log("The Data:",data);
+      setLoadingError(false); 
+    })
+    .catch((error) => {
+      console.error(error);
+      setLoadingError(true);
+    });
+
+}, []);
+
 
   return (
     <div className="wrapper">
@@ -90,7 +107,8 @@ useEffect(() => {
           searchBarRecipeList = {searchBarRecipeList}
           setSearchBarRecipeList = {setSearchBarRecipeList}
           allergyList = {allergyList}
-          user = {user}/>} 
+          user = {user}
+          />} 
         />
         <Route path="/recipe/:id" element={<RecipeDetailedView 
         user={user}
@@ -121,6 +139,7 @@ useEffect(() => {
         user = {user}
         myRecipes= {myRecipes}
         recipeList = {recipeList}
+        selectedUser = {selectedUser}
           />} 
         />
         <Route path="/about" element={<AboutPage />} />

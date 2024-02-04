@@ -1,13 +1,59 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
+
+import { updateUserMealPlan } from '../../api/fetch';
 
 function WeeklyMealPlan({ user, myRecipes,recipeList }) {
   const [selectedRecipe, setSelectedRecipe] = useState({});
-  const weeklyMealsArray = Object.entries(user.weeklyMeals);
+  const weeklyMealsArray = Object.entries(user.weeklyMeals || {});
+  const [updateTrigger, setUpdateTrigger] = useState(false);
 
   function handleChange(recipe) {
     setSelectedRecipe(recipe);
   }
+
+// Function to add a recipe to the weekly meal plan
+const addRecipeToMealPlan = async (day, mealType, recipeId) => {
+  if (Object.keys(selectedRecipe).length === 0) {
+    // If selectedRecipe is empty, do nothing
+    return;
+  }
+
+  const updatedMealDayPlan = { ...user.weeklyMeals[day] };
+  updatedMealDayPlan[mealType].push(recipeId);
+
+  try {
+    // Update the backend and then update the state
+    await updateUserMealPlan(user.id, updatedMealDayPlan, day);
+    setUpdateTrigger(!updateTrigger);
+  } catch (error) {
+    console.error('Error adding recipe to meal plan:', error);
+  }
+};
+
+
+const deleteRecipeFromMealPlan = async (day, mealType, recipeId) => {
+  const updatedMealDayPlan = { ...user.weeklyMeals[day] };
+
+  if (updatedMealDayPlan[mealType]) {
+    const index = updatedMealDayPlan[mealType].indexOf(recipeId);
+
+    if (index !== -1) {
+      updatedMealDayPlan[mealType].splice(index, 1);
+
+      try {
+        await updateUserMealPlan(user.id, updatedMealDayPlan, day);
+        setUpdateTrigger((prev) => !prev);
+      } catch (error) {
+        console.error('Error deleting recipe from meal plan:', error);
+      }
+    }
+  }
+};
+
+useEffect(() => {
+  console.log('Recipe added or deleted. Do something here!');
+}, [updateTrigger]);
 
   return (
     <div className='weekly-mealplan-wrapper'>
@@ -32,29 +78,36 @@ function WeeklyMealPlan({ user, myRecipes,recipeList }) {
           <section className={day} key={index}>
             <h1>{day}</h1>
             <ul className='breakfast'>
-              <h2>breakfast</h2>
-              {/* Map out user's breakfast recipes for the day */}
-              {meals.breakfast.map((recipeId,index) => {
-                if (recipeId !== "") {
-                const recipe = recipeList.find((r) => r.id === recipeId);
-                return (
-                  <li key={recipeId + day + index}>
-                    {recipe && (
-                      <div>
-                        <p>Name: {recipe.name}</p>
-                        <img src={recipe.image} alt="" style={{ width: '100px', height: '100px' }} />
-                      </div>
-                    )}
-                  </li>
-                );
-              }
-              return null; // Skip rendering for empty strings
-              })}
-            </ul>
+  <h2>breakfast</h2>
+  <button onClick={() => {console.log("Day:",day, "SelectedRecipeID:",selectedRecipe.id),addRecipeToMealPlan(day, 'breakfast', selectedRecipe.id)}}>Add</button>
+  
+  {meals.breakfast && Array.isArray(meals.breakfast) ? (
+    meals.breakfast.map((recipeId, index) => {
+      if (recipeId !== "") {
+        const recipe = recipeList.find((r) => r.id === recipeId);
+        return (
+          <li key={recipeId + day + index}>
+            {recipe && (
+              <div>
+                <p>Name: {recipe.name}</p>
+                <img src={recipe.image} alt="" style={{ width: '100px', height: '100px' }} />
+                <button onClick={() =>{ console.log("theDay:",day,"recipeID:",recipeId),deleteRecipeFromMealPlan(day, 'breakfast', recipeId)}}>Delete</button>
+              </div>
+            )}
+          </li>
+        );
+      }
+      return null; // Skip rendering for empty strings
+    })
+  ) : (
+    <p>No breakfast recipes available</p>
+  )}
+</ul>
             <ul className='lunch'>
               <h2>Lunch</h2>
+              <button onClick={() => addRecipeToMealPlan(day, 'lunch', selectedRecipe.id)}>Add</button>
               {/* Map out user's lunch recipes for the day */}
-              {meals.lunch.map((recipeId,index) => {
+              {meals.lunch && meals.lunch.map((recipeId,index) => {
                 if (recipeId !== "") {
                 const recipe = recipeList.find((r) => r.id === recipeId);
                 return (
@@ -63,6 +116,7 @@ function WeeklyMealPlan({ user, myRecipes,recipeList }) {
                       <div>
                         <p>Name: {recipe.name}</p>
                         <img src={recipe.image} alt="" style={{ width: '100px', height: '100px' }} />
+                        <button onClick={() => deleteRecipeFromMealPlan(day, 'lunch', recipeId)}>Delete</button>
                       </div>
                     )}
                   </li>
@@ -73,8 +127,9 @@ function WeeklyMealPlan({ user, myRecipes,recipeList }) {
             </ul>
             <ul className='dinner'>
               <h2>Dinner</h2>
+              <button onClick={() => addRecipeToMealPlan(day, 'dinner', selectedRecipe.id)}>Add</button>
               {/* Map out user's dinner recipes for the day */}
-              {meals.dinner.map((recipeId,index) => {
+              {meals.dinner && meals.dinner.map((recipeId,index) => {
                 if (recipeId !== "") {
                 const recipe = recipeList.find((r) => r.id === recipeId);
                 return (
@@ -83,6 +138,7 @@ function WeeklyMealPlan({ user, myRecipes,recipeList }) {
                       <div>
                         <p>Name: {recipe.name}</p>
                         <img src={recipe.image} alt="" style={{ width: '100px', height: '100px' }} />
+                        <button onClick={() => deleteRecipeFromMealPlan(day, 'dinner', recipeId)}>Delete</button>
                       </div>
                     )}
                   </li>

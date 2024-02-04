@@ -54,7 +54,7 @@ function RecipeDetailedView({user,navigateToProfiles,addAllergyCalled,setAddFavo
           console.error(error);
           setLoadingError(true);
       });
-  }, [id]);
+  }, [id,user]);
       
   return (
     <div>
