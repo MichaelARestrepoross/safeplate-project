@@ -43,24 +43,45 @@ export function updateUserFavorites(userId, updatedFavoritesIds) {
   }).then((response) => response.json());
 }
 
-// Update user User meal-plan
-export function updateUserMealPlan(userId, UpdatedMealDayPlan, day) {
-  // Assuming UpdatedMealDayPlan is an object with keys like "breakfast," "lunch," and "dinner"
-  const updatedBody = {
-    weeklyMeals: {
-      [day]: {
-        breakfast: UpdatedMealDayPlan.breakfast || [],
-        lunch: UpdatedMealDayPlan.lunch || [],
-        dinner: UpdatedMealDayPlan.dinner || [],
-      },
-    },
-  };
+export async function updateUserMealPlan(userId, updatedMealDayPlan, day) {
+  try {
+    // Fetch the existing user meal plan
+    const response = await fetch(`${URL}/userData/${userId}`);
+    const userData = await response.json();
+    const existingMealPlan = userData.weeklyMeals || {};
 
-  return fetch(`${URL}/userData/${userId}`, {
-    method: 'PATCH',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(updatedBody),
-  }).then((response) => response.json());
+    // Update the specific day's meal plan
+    existingMealPlan[day] = {
+      breakfast: updatedMealDayPlan.breakfast || [],
+      lunch: updatedMealDayPlan.lunch || [],
+      dinner: updatedMealDayPlan.dinner || [],
+    };
+
+    
+
+    // Update the backend with the modified meal plan
+    const updateResponse = await fetch(`${URL}/userData/${userId}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        weeklyMeals: existingMealPlan,
+      }),
+    });
+
+    if (!updateResponse.ok) {
+      throw new Error(`Failed to update meal plan: ${updateResponse.statusText}`);
+    }
+
+    const updatedUserData = await updateResponse.json();
+    console.log('Update Response:', updateResponse);
+    console.log('Meal plan updated successfully!', updatedUserData);
+
+    return updatedUserData; // Return the updated data if needed
+  } catch (error) {
+    console.error('Error updating meal plan:', error);
+    throw error;
+  }
 }
+

@@ -6,7 +6,7 @@ import { getSingleRecipe ,updateUserFavorites } from "../../api/fetch"
 
 import "./RecipeDetailedView.css"
 
-function RecipeDetailedView({user,navigateToProfiles,addAllergyCalled,setAddFavoriteCalled}) {
+function RecipeDetailedView({user,navigateToProfiles,setAddFavoriteCalled}) {
     const { id } = useParams();
     const [loadingError, setLoadingError] = useState(false);
     const [newFavoriteId, setNewFavoriteId] = useState("");
@@ -54,7 +54,7 @@ function RecipeDetailedView({user,navigateToProfiles,addAllergyCalled,setAddFavo
           console.error(error);
           setLoadingError(true);
       });
-  }, [id]);
+  }, [id,user]);
       
   return (
     <div>
