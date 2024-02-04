@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { getAllRecipes,updateUserAllergies, updateUserFavorites } from '../../api/fetch';
 
 function UserProfile(
-  {user ,setUser, users ,recipeList,myRecipes,setMyRecipes, allergyList,setAllergyList, setAddAllergyCalled,addAllergyCalled,setAddFavoriteCalled,selectedUser,setSelectedUser,navigateToMealPlan}) {
+  {user ,setUser, users ,recipeList,myRecipes,setMyRecipes, allergyList,setAllergyList, setAddAllergyCalled,setAddFavoriteCalled,selectedUser,setSelectedUser,navigateToMealPlan}) {
 
    
     const [selectedUserId, setSelectedUserId] = useState("");
@@ -14,7 +14,7 @@ function UserProfile(
     const [loadingError, setLoadingError] = useState(false);
 
 
-    
+    x
     
     const addAllergy = async () => {
         try {

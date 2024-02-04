@@ -113,7 +113,6 @@ useEffect(() => {
         <Route path="/recipe/:id" element={<RecipeDetailedView 
         user={user}
         navigateToProfiles = {navigateToProfiles}  
-        addAllergyCalled = {addAllergyCalled}
         setAddFavoriteCalled = {setAddFavoriteCalled}
         />} />
         {/* Double check userProfile id might need to be a userId instead of just id if broken. */}
@@ -129,7 +128,6 @@ useEffect(() => {
           allergyList= {allergyList} 
           setAllergyList = {setAllergyList}
           setAddAllergyCalled={setAddAllergyCalled}
-          addAllergyCalled = {addAllergyCalled}
           setAddFavoriteCalled = {setAddFavoriteCalled}
           navigateToMealPlan = {navigateToMealPlan}
           />} 

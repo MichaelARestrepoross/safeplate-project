@@ -56,9 +56,11 @@ useEffect(() => {
 }, [updateTrigger]);
 
   return (
+  <div>
+    {loadingError ? (
+      <ErrorMessage2 />
+      ) : (
     <div className='weekly-mealplan-wrapper'>
-      {console.log('weeklyMealsArray:', weeklyMealsArray)}
-      {console.log('Slected Meal:', selectedRecipe)}
       <h1 className='Week-meal-plan-header'>{user.name}'s Weekly meal plan</h1>
       <div className='meal-plan-selector'>
         <ul style={{ overflow: 'scroll', height: '350px' }}>
@@ -78,31 +80,31 @@ useEffect(() => {
           <section className={day} key={index}>
             <h1>{day}</h1>
             <ul className='breakfast'>
-  <h2>breakfast</h2>
-  <button onClick={() => {console.log("Day:",day, "SelectedRecipeID:",selectedRecipe.id),addRecipeToMealPlan(day, 'breakfast', selectedRecipe.id)}}>Add</button>
-  
-  {meals.breakfast && Array.isArray(meals.breakfast) ? (
-    meals.breakfast.map((recipeId, index) => {
-      if (recipeId !== "") {
-        const recipe = recipeList.find((r) => r.id === recipeId);
-        return (
-          <li key={recipeId + day + index}>
-            {recipe && (
-              <div>
-                <p>Name: {recipe.name}</p>
-                <img src={recipe.image} alt="" style={{ width: '100px', height: '100px' }} />
-                <button onClick={() =>{ console.log("theDay:",day,"recipeID:",recipeId),deleteRecipeFromMealPlan(day, 'breakfast', recipeId)}}>Delete</button>
-              </div>
-            )}
-          </li>
-        );
-      }
-      return null; // Skip rendering for empty strings
-    })
-  ) : (
-    <p>No breakfast recipes available</p>
-  )}
-</ul>
+              <h2>breakfast</h2>
+              <button onClick={() => {console.log("Day:",day, "SelectedRecipeID:",selectedRecipe.id),addRecipeToMealPlan(day, 'breakfast', selectedRecipe.id)}}>Add</button>
+              
+              {meals.breakfast && Array.isArray(meals.breakfast) ? (
+                meals.breakfast.map((recipeId, index) => {
+                  if (recipeId !== "") {
+                    const recipe = recipeList.find((r) => r.id === recipeId);
+                    return (
+                      <li key={recipeId + day + index}>
+                        {recipe && (
+                          <div>
+                            <p>Name: {recipe.name}</p>
+                            <img src={recipe.image} alt="" style={{ width: '100px', height: '100px' }} />
+                            <button onClick={() =>{ console.log("theDay:",day,"recipeID:",recipeId),deleteRecipeFromMealPlan(day, 'breakfast', recipeId)}}>Delete</button>
+                          </div>
+                        )}
+                      </li>
+                    );
+                  }
+                  return null; // Skip rendering for empty strings
+                })
+              ) : (
+                <p>No breakfast recipes available</p>
+              )}
+            </ul>
             <ul className='lunch'>
               <h2>Lunch</h2>
               <button onClick={() => addRecipeToMealPlan(day, 'lunch', selectedRecipe.id)}>Add</button>
@@ -151,6 +153,8 @@ useEffect(() => {
         ))}
       </div>
     </div>
+      )}
+  </div>
   );
 }
 
