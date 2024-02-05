@@ -52,6 +52,7 @@ function RecipeIndex({recipeList,setRecipeList,editedRecipeList,setEditedRecipeL
           ) : (
           <div className='index-wrapper'>
             <input
+              className="search-bar"
               type='text'
               placeholder='Search recipes...'
               value={searchTerm}

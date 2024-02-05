@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState,useEffect } from 'react';
+import "./WeeklyMealPlan.css"
 
 import { updateUserMealPlan } from '../../api/fetch';
 
@@ -57,7 +58,7 @@ useEffect(() => {
 
   return (
     <div className='weekly-mealplan-wrapper'>
-      <h1 className='Week-meal-plan-header'>{user.name}'s Weekly meal plan</h1>
+      <h1 className='week-meal-plan-header'>{user.name}'s Weekly meal plan</h1>
       <div className='meal-plan-selector'>
         <ul className='favorite-options' style={{ overflow: 'scroll', height: '350px' }}>
           {myRecipes.map((recipe) => (
@@ -67,7 +68,7 @@ useEffect(() => {
               onClick={() => handleChange(recipe)}
             >
               <br />
-              <p>Name: {recipe.name}</p>
+              <h4>{recipe.name}</h4>
               <img src={recipe.image} alt="" style={{ width: '200px', height: '200px' }} />
               <p>Description: {recipe.description}</p>
               <br />
@@ -80,7 +81,7 @@ useEffect(() => {
           <section className={day} key={index}>
             <h1>{day}</h1>
             <ul className='breakfast'>
-              <h2>breakfast</h2>
+              <h2 className='meal-type'>Breakfast</h2>
               <button onClick={() => {console.log("Day:",day, "SelectedRecipeID:",selectedRecipe.id),addRecipeToMealPlan(day, 'breakfast', selectedRecipe.id)}}>Add</button>
               
               {meals.breakfast && Array.isArray(meals.breakfast) ? (
@@ -91,9 +92,9 @@ useEffect(() => {
                       <li className='scheduled-meal breakfast' key={recipeId + day + index}>
                         {recipe && (
                           <div>
-                            <p>Name: {recipe.name}</p>
+                            <h4>{recipe.name}</h4>
                             <img src={recipe.image} alt="" style={{ width: '100px', height: '100px' }} />
-                            <button onClick={() =>{ console.log("theDay:",day,"recipeID:",recipeId),deleteRecipeFromMealPlan(day, 'breakfast', recipeId)}}>Delete</button>
+                            <button className="delete-button" onClick={() =>{ console.log("theDay:",day,"recipeID:",recipeId),deleteRecipeFromMealPlan(day, 'breakfast', recipeId)}}>Delete</button>
                           </div>
                         )}
                       </li>
@@ -106,7 +107,7 @@ useEffect(() => {
               )}
             </ul>
             <ul className='lunch'>
-              <h2>Lunch</h2>
+              <h2 className='meal-type'>Lunch</h2>
               <button onClick={() => addRecipeToMealPlan(day, 'lunch', selectedRecipe.id)}>Add</button>
               {/* Map out user's lunch recipes for the day */}
               {meals.lunch && meals.lunch.map((recipeId,index) => {
@@ -116,9 +117,9 @@ useEffect(() => {
                   <li className='scheduled-meal lunch' key={recipeId + day +index}>
                     {recipe && (
                       <div>
-                        <p>Name: {recipe.name}</p>
+                        <h4>{recipe.name}</h4>
                         <img src={recipe.image} alt="" style={{ width: '100px', height: '100px' }} />
-                        <button onClick={() => deleteRecipeFromMealPlan(day, 'lunch', recipeId)}>Delete</button>
+                        <button className="delete-button" onClick={() => deleteRecipeFromMealPlan(day, 'lunch', recipeId)}>Delete</button>
                       </div>
                     )}
                   </li>
@@ -128,7 +129,7 @@ useEffect(() => {
               })}
             </ul>
             <ul className='dinner'>
-              <h2>Dinner</h2>
+              <h2 className='meal-type'>Dinner</h2>
               <button onClick={() => addRecipeToMealPlan(day, 'dinner', selectedRecipe.id)}>Add</button>
               {/* Map out user's dinner recipes for the day */}
               {meals.dinner && meals.dinner.map((recipeId,index) => {
@@ -140,7 +141,7 @@ useEffect(() => {
                       <div>
                         <p>Name: {recipe.name}</p>
                         <img src={recipe.image} alt="" style={{ width: '100px', height: '100px' }} />
-                        <button onClick={() => deleteRecipeFromMealPlan(day, 'dinner', recipeId)}>Delete</button>
+                        <button className="delete-button" onClick={() => deleteRecipeFromMealPlan(day, 'dinner', recipeId)}>Delete</button>
                       </div>
                     )}
                   </li>

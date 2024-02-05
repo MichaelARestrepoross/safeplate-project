@@ -1,0 +1,14 @@
+.all-recipes {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 20px;
+}
+  
+.index-wrapper{
+    margin-top: 20px;
+}
+
+.search-bar{
+    margin-left: 11px;
+}

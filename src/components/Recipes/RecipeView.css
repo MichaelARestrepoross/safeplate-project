@@ -1,0 +1,36 @@
+.single-recipe {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.2s ease-in-out, box-shadow 0.3s ease;
+    background-color: #fff;
+    text-decoration: none;
+  }
+  
+  .single-recipe:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  }
+  
+  .recipe-name {
+    font-size: 1.2rem;
+    color: #333;
+    padding: 16px;
+    background-color: #f8f8f8;
+    margin: 0;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .food-image img {
+    width: 200px;
+    height: 200px;
+    display: block;
+  }
+  
+  .description-wrapper {
+    padding: 16px;
+    color: #666;
+    font-size: 0.9rem;
+  }
+  

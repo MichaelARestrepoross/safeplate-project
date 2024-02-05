@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom'
 import React from 'react'
+import "./RecipeView.css"
 
 function RecipeView({
     recipe: {id,name,image,description}}) {
   return (
     <Link className='single-recipe' to={`/recipe/${id}`}>
-    <div>RecipeView</div>
     <article>
       <h2 className='recipe-name'>
         {name}  
