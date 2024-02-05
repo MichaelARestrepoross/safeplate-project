@@ -26,6 +26,7 @@ const [user, setUser] = useState({});
 const [myRecipes, setMyRecipes] = useState([]);
 const [selectedUser, setSelectedUser] = useState("");
 const [loadingError, setLoadingError] = useState(false);
+const [createUserToggle,setCreatedUserToggle] = useState(false); 
 
 //Allergies
 const [allergyList, setAllergyList] = useState([]);
@@ -66,7 +67,7 @@ useEffect(() => {
       setLoadingError(true);
     });
 
-}, [addAllergyCalled,addFavoriteCalled]);
+}, [addAllergyCalled,addFavoriteCalled,createUserToggle]);
 
 useEffect(() => {
   getAllRecipes()
@@ -130,6 +131,8 @@ useEffect(() => {
           setAddAllergyCalled={setAddAllergyCalled}
           setAddFavoriteCalled = {setAddFavoriteCalled}
           navigateToMealPlan = {navigateToMealPlan}
+          createUserToggle = {createUserToggle}
+          setCreatedUserToggle = {setCreatedUserToggle}
           />} 
           
         />
