@@ -4,9 +4,10 @@ import ErrorMessage3 from '../Errors/ErrorMessage3'
 import { Link } from 'react-router-dom';
 import { getAllRecipes,updateUserAllergies, updateUserFavorites } from '../../api/fetch';
 import "./UserProfile.css"
+import UserForm from './UserForm';
 
 function UserProfile(
-  {user ,setUser, users ,recipeList,myRecipes,setMyRecipes, allergyList,setAllergyList, setAddAllergyCalled,setAddFavoriteCalled,selectedUser,setSelectedUser,navigateToMealPlan}) {
+  {user ,setUser, users ,recipeList,myRecipes,setMyRecipes, allergyList,setAllergyList, setAddAllergyCalled,setAddFavoriteCalled,selectedUser,setSelectedUser,navigateToMealPlan,createUserToggle,setCreatedUserToggle}) {
 
    
     const [selectedUserId, setSelectedUserId] = useState("");
@@ -125,6 +126,11 @@ function UserProfile(
                 </option>
               ))}
             </select>
+            <p>Want to Create a user instead?</p>
+            <UserForm
+            createUserToggle = {createUserToggle}
+            setCreatedUserToggle={setCreatedUserToggle}
+            />
             {/* Displaying individual recipe information */}
             <h2>My favorites</h2>
             {console.log("Selected User:",selectedUser)}

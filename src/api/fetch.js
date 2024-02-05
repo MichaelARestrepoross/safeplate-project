@@ -85,3 +85,26 @@ export async function updateUserMealPlan(userId, updatedMealDayPlan, day) {
   }
 }
 
+export async function createUser(userData) {
+  try {
+    const response = await fetch(`${URL}/userData`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(userData),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to create user: ${response.statusText}`);
+    }
+
+    const createdUser = await response.json();
+    console.log('User created successfully:', createdUser);
+
+    return createdUser;
+  } catch (error) {
+    console.error('Error creating user:', error);
+    throw error;
+  }
+}
