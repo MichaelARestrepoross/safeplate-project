@@ -20,7 +20,15 @@ SafePlate is an innovative web application designed to enhance the dining experi
 - **CSS**: Stylish and responsive design ensuring an engaging user experience across devices.
 - **API Integration**: Connects to a custom backend via the Fetch API, handling data retrieval and updates for recipes, user profiles, and meal plans.
 
-## Getting Started
+## SafePlate Web Application
+
+Explore the SafePlate web application and test it yourself:
+
+[SafePlate Web Application](https://main--benevolent-beignet-31f50d.netlify.app/recipe)
+
+Feel free to navigate through our platform and discover the features designed for your convenience.
+
+## Getting Started Locally
 
 Follow these steps to get the SafePlate application running on your local machine.
 
