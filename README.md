@@ -24,7 +24,7 @@ SafePlate is an innovative web application designed to enhance the dining experi
 
 Explore the SafePlate web application and test it yourself:
 
-[SafePlate Web Application](https://main--benevolent-beignet-31f50d.netlify.app/recipe)
+[SafePlate Web Application](https://main--benevolent-beignet-31f50d.netlify.app)
 
 Feel free to navigate through our platform and discover the features designed for your convenience.
 
