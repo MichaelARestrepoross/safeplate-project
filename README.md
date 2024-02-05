@@ -1,31 +1,61 @@
-# Basic React Starter
+# SafePlate Application
 
-You can use this starter to create any ReactJS app you would like.
-Unlike when you use `npm create vite@latest your-app-name -- --template react`,
+## Overview
 
-This repo has removed all of the unwanted starter code that is normally included when using `npm` to create an application.
+SafePlate is an innovative web application designed to enhance the dining experience for individuals with dietary restrictions. Leveraging the power of React and modern web technologies, SafePlate offers personalized recipe recommendations, taking into account users' dietary preferences and allergies. The application aims to simplify meal planning and ensure a safe, enjoyable eating experience for everyone.
 
-## Getting started
+## Features
 
-- `clone` this application
-- change the name of this directory to a name that refers to your current project. Don't just leave it as `react-basic-starter`
-  _Hint:_ In the terminal, type `mv react-basic-starter new-name-of-your-app`
-- `cd` into the app
-- in the terminal run `git remote remove origin` in order to remove any connection to this Github folder.
+- **Explore Recipes**: Dive into a diverse collection of recipes, each with detailed information including ingredients, preparation instructions, and nutritional content.
+- **Search Bar Functionality **: Users can search for recipe's with their allergy filters kept in mind. 
+- **Personalized User Profiles**: Customize your profile with dietary needs, allergies, and favorite recipes to receive tailored recipe suggestions. The application allows for the creation of new user profiles through a user-friendly form, capturing essential information for a personalized experience.
+- **User Creation**: Facilitates the addition of new users through a simple form, enhancing the application's accessibility and user engagement.
+- **Weekly Meal Planning**: Efficiently plan your meals for the week with an easy-to-use interface, adding/removing recipes to each day for breakfast, lunch, and dinner.
+- **Dietary Filtering**: The application intelligently filters out recipes containing allergens or ingredients you wish to avoid, offering only safe and suitable options.
+- **Favorites Management**: Save your top recipes to your favorites for quick and easy access anytime.
 
-- run `npm install`
-- to start the project, run `npm run dev`
-- no navigate to `localhost:3000` and you will see the app
-- Now you are ready to code
+## Technology Stack
 
-If you would like to connect this afterwards to your personal Github then:
+- **Frontend**: Developed with React.js, utilizing functional components and hooks for state management, and React Router for seamless navigation.
+- **CSS**: Stylish and responsive design ensuring an engaging user experience across devices.
+- **API Integration**: Connects to a custom backend via the Fetch API, handling data retrieval and updates for recipes, user profiles, and meal plans.
 
-- go to your Github account in the browser
-- create a new repo and give it a name
-- make sure the repo is public and click `Create Repository`
-- copy the instructions under the title `…or push an existing repository from the command line`
-- paste the commands in your terminal
+## Getting Started
 
-You have now connected your project to the repo.
+Follow these steps to get the SafePlate application running on your local machine.
 
-**You have the ability to clone this repo over and over to create your own projects. Just remember to change the name of the folder so that you do not have duplicates**
+### Prerequisites
+
+- Node.js and npm installed on your machine.
+
+### Installation
+
+1. **Clone the repository**
+
+    ```sh
+    git clone <repository-url>
+    cd safeplate
+    ```
+
+2. **Install NPM packages**
+
+    ```sh
+    npm install
+    ```
+
+3. **Environment Configuration**
+
+    Create a `.env` file in the root directory and add your backend API URL:
+
+    ```plaintext
+    VITE_BASE_API_URL=https://yourapi.url
+    ```
+
+4. **Start the Application**
+
+    ```sh
+    npm start
+    ```
+
+    The application will be available at `http://localhost:3000`.
+
