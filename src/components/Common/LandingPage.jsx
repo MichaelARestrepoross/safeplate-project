@@ -4,6 +4,11 @@ import "./LandingPage.css";
 function LandingPage({navigateToRecipes,navigateToProfiles}) {
   return (
     <div className='landing-page-wrapper'>
+      <video autoPlay loop muted playsInline className="landing-page-video">
+        <source src="https://res.cloudinary.com/drsj2l9it/video/upload/v1707098375/istockphoto-1148854218-640_adpp_is_sjcf9s.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+      <section className='landing-info'>
       <h1 className='landing-page-h1'>Safeplate</h1>
       <h3 >Welcome to SafePlate – where your culinary journey begins with safety and satisfaction! 🍽️</h3>
       <p>
@@ -28,6 +33,7 @@ function LandingPage({navigateToRecipes,navigateToProfiles}) {
       <button className ="landing-page-to-profile-button" onClick={navigateToProfiles}>
         Have an allergy?<br /> Set your user allergie profile here.
       </button>
+      </section>
 
     </div>
   )

@@ -1,6 +1,6 @@
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-
+import "./App.css"
 //calling api test
 import { getAllRecipes,getAllUserData } from './api/fetch';
 

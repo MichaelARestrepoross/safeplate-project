@@ -44,12 +44,15 @@ img {
 }
 
 
-h1 {
-    color: var(--platinum); 
+.about-h1 {
+    padding-top: 10px;
+    color: black; 
     text-align: center;
 }
 
-p {
+.chris p,
+.mike p,
+.isiah p {
     font-family:Georgia, 'Times New Roman', Times, serif;
     line-height: 1.5;
 }

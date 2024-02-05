@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import ErrorMessage3 from '../Errors/ErrorMessage3'
 import { Link } from 'react-router-dom';
 import { getAllRecipes,updateUserAllergies, updateUserFavorites } from '../../api/fetch';
+import "./UserProfile.css"
 
 function UserProfile(
   {user ,setUser, users ,recipeList,myRecipes,setMyRecipes, allergyList,setAllergyList, setAddAllergyCalled,setAddFavoriteCalled,selectedUser,setSelectedUser,navigateToMealPlan}) {
@@ -111,7 +112,7 @@ function UserProfile(
           <section className='user-profile'>
             <h2 className='users-name'>{selectedUser ? selectedUser.name : 'Select a user'}</h2><br />
             <p>Hello {selectedUser ? selectedUser.name : 'Select a user'}, would you like to edit your favorites or maybe your allergies today?</p>
-            {selectedUser?  <h2 onClick={navigateToMealPlan}> {selectedUser.name}'s meal plan</h2>  : null}
+            {selectedUser?  <h2 className='mealplan-link' onClick={navigateToMealPlan}> {selectedUser.name}'s meal plan</h2>  : null}
             {/* DropDown */}
             <select
               value={selectedUserId}
@@ -127,12 +128,12 @@ function UserProfile(
             {/* Displaying individual recipe information */}
             <h2>My favorites</h2>
             {console.log("Selected User:",selectedUser)}
-            <ul style={{overflow:"scroll", height:"350px"}}>
+            <ul className="favorites" style={{overflow:"scroll", height:"350px"}}>
               {myRecipes.map((recipe) => (
                 <li className='single-favorite' key={recipe.id}>
                 <br />
                 <Link to={`/recipe/${recipe.id}`}>
-                  <p>Name: {recipe.name}</p>
+                  <h3>{recipe.name}</h3>
                   <img src={recipe.image} alt="" style={{width: "200px", height:"200px"}} />
                   <p>Description: {recipe.description}</p>
                 </Link>

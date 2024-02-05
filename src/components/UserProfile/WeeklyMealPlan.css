@@ -1,0 +1,133 @@
+.weekly-mealplan-wrapper {
+    max-width: 80%;
+    margin: 0 auto;
+    background: white;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  }
+  
+  .week-meal-plan-header {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .meal-plan-selector {
+    display: block;
+    overflow-x: auto;
+    margin-bottom: 20px;
+  }
+  
+  .favorite-options li {
+    border: 1px solid #eaeaea;
+    padding: 10px;
+    border-radius: 5px;
+    margin-right: 10px;
+    width: 100%;
+    background-color: #fafafa;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .favorite-options li.selected-recipe {
+    background-color: gray;
+  }
+  
+  .favorite-options img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+  }
+  
+  .the-meal-plan-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 20px;
+  }
+  
+  .the-meal-plan-days section {
+    border: 1px solid #eaeaea;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #fafafa;
+  }
+  
+  .the-meal-plan-days h1 {
+    text-align: center;
+    margin: 0;
+    padding: 10px 0;
+    background-color: #e91e63;
+    color: white;
+    border-radius: 4px 4px 0 0;
+  }
+  
+  .breakfast,
+  .lunch,
+  .dinner {
+    list-style-type: none;
+    padding-left: 0;
+    margin-bottom: 20px;
+  }
+  .meal-type{
+   color: blue;
+  }
+  
+  .breakfast h2,
+  .lunch h2,
+  .dinner h2 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+  }
+  
+  .scheduled-meal {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .scheduled-meal img {
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+  }
+  .delete-button {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+  }
+  
+  
+  .the-meal-plan-days button {
+    margin: 10px 0;
+  }
+  
+  .scheduled-meal button {
+    margin-left: auto;
+  }
+  
+  .scheduled-meal p {
+    margin: 0;
+  }
+  
+  @media (max-width: 768px) {
+    .the-meal-plan-days {
+      grid-template-columns: 1fr;
+    }
+  }
+  

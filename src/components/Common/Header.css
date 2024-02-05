@@ -1,15 +1,31 @@
-:root {
-    --arylide-yellow: #e9d758ff;
-    --myrtle-green: #297373ff;
-    --coral: #ff8552ff;
-    --platinum: #e6e6e6ff;
-    --jet: #39393aff;
-}
-header {
-    background-color: var(--myrtle-green);
-    color: var(--platinum); 
-    padding: 20px;
-    text-align: center;
+.Header-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: black;
+    color: white;
+    padding: 10px 20px;
+  }
+  
+  .home-h1 {
     font-size: 24px;
-    font-weight: bold; 
-}
+    color: white;
+    cursor: pointer;
+  }
+  
+  .navigate-wrapper {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .navigate-wrapper h2 {
+    font-size: 18px;
+    color: green;
+    cursor: pointer;
+    margin: 0;
+    transition: color 0.3s ease;
+  }
+  
+  .navigate-wrapper h2:hover {
+    color: white;
+  }

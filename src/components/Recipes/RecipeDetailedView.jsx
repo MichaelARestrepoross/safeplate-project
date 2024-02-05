@@ -62,25 +62,19 @@ function RecipeDetailedView({user,navigateToProfiles,setAddFavoriteCalled}) {
           <ErrorMessage2 />
           ) : (
           <div className='detailed-recipe-wrapper'>
-            <div className="button-wrapper">
-                {user.name ? <button className="add-favorite-button" onClick={addFavorite}>
-                    Add to {user.name}'s favorites
-                </button> : <button className="add-favorite-button" onClick={navigateToProfiles}>
-                     Click here to select a user.
-                </button> }
-            </div>
             <section className='detailed-recipe'>
                 <h2 className='recipe-name'>
                     {recipe.name}  
                 </h2>
-                <div className='food-image'>
-                    <img src={recipe.image} alt={`${recipe.name}'s image`} />
+                <div className='food-image-wrapper'>
+                    <img className="detailed-img" src={recipe.image} alt={`${recipe.name}'s image`} />
                 </div>
                 <div className='description-wrapper'>
                     <p>{recipe.description}</p>
                 </div>
                 <div className='ingredients-wrapper'>
                     <ul>
+                        <h3>Ingredients</h3>
                         {recipe.ingredients.map((ingredient,index) => {
                             return <li className="ingredient-item" key={index}>{ingredient}</li>;
                         })}
@@ -88,11 +82,19 @@ function RecipeDetailedView({user,navigateToProfiles,setAddFavoriteCalled}) {
                 </div>
                 <div className='instructions-wrapper'>
                     <ol>
+                        <h3>Instructions</h3>
                         {recipe.instructions.map((instruction,index) => {
                             return <li className="instruction-item" key={index}>{instruction}</li>;
                         })}
                     </ol>
                 </div>
+                <div className="button-wrapper">
+                {user.name ? <button className="add-favorite-button" onClick={addFavorite}>
+                    Add Recipe to {user.name}'s favorites
+                </button> : <button className="add-favorite-button" onClick={navigateToProfiles}>
+                     Click here to select a user.
+                </button> }
+            </div>
             </section>
           </div>
       )}
