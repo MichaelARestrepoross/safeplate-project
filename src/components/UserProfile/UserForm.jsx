@@ -115,8 +115,7 @@ function UserForm({createUserToggle,setCreatedUserToggle}) {
   return (
       <form onSubmit={handleFormSubmit}>
         <label>
-          User Name:
-          <input type="text" value={userName} onChange={(e) => setUserName(e.target.value)} />
+          <input type="text" placeholder='User Name:' value={userName} onChange={(e) => setUserName(e.target.value)} />
         </label>
         <button type="submit">Create User</button>
       </form>

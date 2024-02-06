@@ -111,7 +111,7 @@ function UserProfile(
       ) : (
         <div className='user-profile-wrapper'>
           <section className='user-profile'>
-            <h2 className='users-name'>{selectedUser ? selectedUser.name : 'Select a user'}</h2><br />
+            <h2 className='users-name'>{selectedUser ? selectedUser.name : 'Select a user'}</h2>
             <p>Hello {selectedUser ? selectedUser.name : 'Select a user'}, would you like to edit your favorites or maybe your allergies today?</p>
             {selectedUser?  <h2 className='mealplan-link' onClick={navigateToMealPlan}> {selectedUser.name}'s meal plan</h2>  : null}
             {/* DropDown */}

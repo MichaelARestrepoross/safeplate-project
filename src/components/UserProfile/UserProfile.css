@@ -1,8 +1,6 @@
-
-  
-  .user-profile-container {
+.user-profile-wrapper {
     max-width: 800px;
-    margin: 30px auto;
+    margin: 0 auto;
     padding: 20px;
     background: #fff;
     border-radius: 10px;
@@ -19,7 +17,8 @@
   }
   .mealplan-link{
     cursor: pointer;
-    width: 15%;
+    width: 30%;
+    padding-top: 20px;
   }
   .mealplan-link:hover{
     color: green;
@@ -109,4 +108,12 @@
   .add-allergy-container button {
     margin-left: 10px;
   }
+
+  .favorites{
+    margin-bottom: 25px;
+    margin-top: 25px;
+  }
   
+  .users-name{
+    font-size: xx-large;
+  }
