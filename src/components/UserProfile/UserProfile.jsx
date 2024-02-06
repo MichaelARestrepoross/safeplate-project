@@ -135,6 +135,7 @@ function UserProfile(
             <h2>My favorites</h2>
             {console.log("Selected User:",selectedUser)}
             <ul className="favorites" style={{overflow:"scroll", height:"350px"}}>
+              {myRecipes.length === 0 ? <p className='default-message'>Your Favorites will be placed here. <br /> Go to "Recipes" and add the recipe by clicking the recipe and then the "Add Recipe to Favorites" button. </p> : null}
               {myRecipes.map((recipe) => (
                 <li className='single-favorite' key={recipe.id}>
                 <br />
@@ -153,6 +154,7 @@ function UserProfile(
                     {console.log(allergyList)}
             <h2>My Allergies</h2>
             <ul className='allergy-list' style={{overflow:"scroll", height:"350px"}}>
+              {allergyList.length === 0 ? <p className='default-message'>Your Allergies will be placed here. <br /> Scroll down to add your allergens.</p> : null}
               {allergyList ? allergyList.map((allergy,index) => (
                 <li className='single-allergen' key={index}>
                     {allergy}
@@ -160,7 +162,7 @@ function UserProfile(
                         Delete
                     </button>
                 </li> 
-              )):null}
+              )): null}
             </ul>
 
             {/* Add Allergy input and button */}

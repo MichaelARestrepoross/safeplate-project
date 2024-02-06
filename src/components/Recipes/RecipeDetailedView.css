@@ -9,7 +9,8 @@
   }
   
   .button-wrapper {
-    margin-bottom: 20px;
+    margin: 20px 0;
+    text-align: center;
   }
   ol h3,
   ul h3 {
@@ -25,7 +26,7 @@
     border-radius: 4px;
     font-size: 16px;
   }
-  
+
   .detailed-recipe {
     color: #333
   }
@@ -34,6 +35,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-top: 1rem;
   }
 
   .recipe-name {

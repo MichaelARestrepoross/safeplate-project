@@ -29,7 +29,7 @@ img {
     list-style: none;
     border: 1px solid var(--platinum); 
     padding: 15px;
-    background-color: var(--platinum); 
+    background-color: white; 
     display: flex;
     flex-direction: column;
     align-items: center;
