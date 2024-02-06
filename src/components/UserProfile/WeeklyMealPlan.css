@@ -49,10 +49,10 @@
   }
   
   .the-meal-plan-days section {
-    border: 1px solid #eaeaea;
+    border: 1px solid grey;
     border-radius: 5px;
     padding: 10px;
-    background-color: #fafafa;
+    background-color: white;
   }
   
   .the-meal-plan-days h1 {
@@ -125,7 +125,7 @@
     margin: 0;
   }
   
-  @media (max-width: 768px) {
+  @media (max-width: 1300px) {
     .the-meal-plan-days {
       grid-template-columns: 1fr;
     }
