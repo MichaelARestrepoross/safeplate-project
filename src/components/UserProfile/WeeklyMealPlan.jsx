@@ -82,9 +82,10 @@ useEffect(() => {
             <h1>{day}</h1>
             <ul className='breakfast'>
               <h2 className='meal-type'>Breakfast</h2>
-              <button onClick={() => {console.log("Day:",day, "SelectedRecipeID:",selectedRecipe.id),addRecipeToMealPlan(day, 'breakfast', selectedRecipe.id)}}>Add</button>
+              <button onClick={() => {addRecipeToMealPlan(day, 'breakfast', selectedRecipe.id)}}>Add</button>
               
               {meals.breakfast && Array.isArray(meals.breakfast) ? (
+                //breakfast
                 meals.breakfast.map((recipeId, index) => {
                   if (recipeId !== "") {
                     const recipe = recipeList.find((r) => r.id === recipeId);
@@ -94,7 +95,7 @@ useEffect(() => {
                           <div>
                             <h4>{recipe.name}</h4>
                             <img src={recipe.image} alt="" style={{ width: '100px', height: '100px' }} />
-                            <button className="delete-button" onClick={() =>{ console.log("theDay:",day,"recipeID:",recipeId),deleteRecipeFromMealPlan(day, 'breakfast', recipeId)}}>Delete</button>
+                            <button className="delete-button" onClick={() =>{ deleteRecipeFromMealPlan(day, 'breakfast', recipeId)}}>Delete</button>
                           </div>
                         )}
                       </li>

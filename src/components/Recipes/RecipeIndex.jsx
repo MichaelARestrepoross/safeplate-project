@@ -8,13 +8,13 @@ function RecipeIndex({recipeList,setRecipeList,editedRecipeList,setEditedRecipeL
     const [loadingError, setLoadingError] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
 
-    async function allergyRecipeFilter(theAllergyList) {
+    function allergyRecipeFilter(theAllergyList) {
       let newEditedRecipeList = [...recipeList]; 
       console.log("The List:",allergyList);
       theAllergyList.forEach((allergy)=>{
         console.log("The Alergy:", allergy)
         // Filter out recipes that include the allergy
-         newEditedRecipeList = newEditedRecipeList.filter((recipe,i) => {
+         newEditedRecipeList = newEditedRecipeList.filter((recipe) => {
           const ingredientString = recipe.ingredients.join(",")
           return !(ingredientString.includes(allergy));
         });
